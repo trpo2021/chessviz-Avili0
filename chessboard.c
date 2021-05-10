@@ -50,6 +50,7 @@ static char figureToChar(Figure figure)
         figureChar = 'b';
         break;
     case FigureTypeQueen:
+        figureChar = 'q';
         break;
     case FigureTypeKing:
         figureChar = 'k';

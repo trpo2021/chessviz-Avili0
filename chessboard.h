@@ -32,7 +32,6 @@ typedef enum {
     ExtraTypeTransToBishop,
 } ExtraType;
 
-
 typedef struct {
     Field from;
     Field to;
@@ -40,8 +39,6 @@ typedef struct {
     MoveType type;
     ExtraType extra;
 } Move;
-
-
 
 typedef struct {
     FigureType type;

@@ -18,13 +18,30 @@ typedef struct {
     char number;
 } Field;
 
+typedef enum { MoveTypeNormal, MoveTypeAttack } MoveType;
+typedef enum {
+    ExtraTypeShortCastling,
+    ExtraTypeLongCastling,
+    ExtraTypeEnPassant,
+    ExtraTypeCheck,
+    ExtraTypeCheckmate,
+    ExtraTypeTransToQueen,
+    ExtraTypeTransToKing,
+    ExtraTypeTransToRook,
+    ExtraTypeTransToKnight,
+    ExtraTypeTransToBishop,
+} ExtraType;
+
+
 typedef struct {
     Field from;
     Field to;
-    char who;
-    char type;
-    char extra;
+    Figure who;
+    MoveType type;
+    ExtraType extra;
 } Move;
+
+
 
 typedef struct {
     FigureType type;

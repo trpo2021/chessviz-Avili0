@@ -26,11 +26,16 @@ typedef enum {
     ExtraTypeCheck,
     ExtraTypeCheckmate,
     ExtraTypeTransToQueen,
-    ExtraTypeTransToKing,
     ExtraTypeTransToRook,
     ExtraTypeTransToKnight,
     ExtraTypeTransToBishop,
+    ExtraTypeNone
 } ExtraType;
+
+typedef struct {
+    FigureType type;
+    FigureSide side;
+} Figure;
 
 typedef struct {
     Field from;
@@ -41,13 +46,36 @@ typedef struct {
 } Move;
 
 typedef struct {
-    FigureType type;
-    FigureSide side;
-} Figure;
-
-typedef struct {
     Figure cells[CHESSBOARD_SIZE][CHESSBOARD_SIZE];
 } Chessboard;
+
+typedef enum {
+    ParseErrorBadFigureType,
+    ParseErrorBadExtra,
+    ParseErrorBadMoveType,
+    ParseErrorBadNum,
+    ParseErrorBadPoint
+} ParseError;
+
+typedef struct {
+    int num;
+    Move move[100];
+} Moves;
+
+typedef enum {
+    MoveErrorNoAtackType,
+
+} MoveError;
+
+typedef struct {
+    int isTrigger;
+    char* desc;
+    int index;
+    union type {
+        ParseError p;
+        MoveError m;
+    };
+} Errors;
 
 void createChessboard(Chessboard* chessboard, const char* fromString);
 

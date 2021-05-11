@@ -1,4 +1,6 @@
 *.o
-chessviz
 *.exe
 *.vs
+*.d
+*.a
+*.txt

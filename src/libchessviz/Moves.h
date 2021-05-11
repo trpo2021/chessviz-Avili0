@@ -3,4 +3,4 @@
 
 int DoMove(Chessboard* chessboard, Move move, Errors* error);
 
-//int MoveIsCorect(Chessboard* chessboard, Move move, Errors* error);
+// int MoveIsCorect(Chessboard* chessboard, Move move, Errors* error);

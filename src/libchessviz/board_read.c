@@ -6,7 +6,7 @@
 Move ParseMove(char* str, Errors* error)
 {
     error->isTrigger = 0;
-    Move move, move2;
+    Move move;
     char FType[8] = {'\0'}, type, Extra[6] = {'\0'};
     sscanf(str,
            "%7[ QRNBK0-]%c%c%c%c%c%5[+#e.pQRNB]",
@@ -21,33 +21,33 @@ Move ParseMove(char* str, Errors* error)
     int lene = strlen(Extra);
     if (move.from.letter < 'a' || move.from.letter > 'h') {
         // error
-        return move2;
+        return move;
     }
     if (move.from.number < '1' || move.from.number > '8') {
         // error
-        return move2;
+        return move;
     }
     if (move.to.letter < 'a' || move.to.letter > 'h') {
         // error
-        return move2;
+        return move;
     }
     if (move.to.number < '1' || move.to.number > '8') {
         // error
-        return move2;
+        return move;
     }
     if (len == 7) {
         error->index += 7;
         sprintf(error->desc, "Error at column %d", error->index);
         error->type.p = ParseErrorBadFigureType;
         error->isTrigger = 1;
-        return move2;
+        return move;
     }
     if (lene == 5) {
         error->index = 46;
         sprintf(error->desc, "Error at column %d", error->index);
         error->type.p = ParseErrorBadExtra;
         error->isTrigger = 1;
-        return move2;
+        return move;
     }
     if (len > 0) {
         if (len == 2 && FType[0] == ' ') {
@@ -72,7 +72,7 @@ Move ParseMove(char* str, Errors* error)
                 sprintf(error->desc, "Error at column %d", error->index);
                 error->type.p = ParseErrorBadFigureType;
                 error->isTrigger = 1;
-                return move2;
+                return move;
             }
         } else if (len == 1) {
             if (FType[0] == ' ') {
@@ -82,7 +82,7 @@ Move ParseMove(char* str, Errors* error)
                 sprintf(error->desc, "Error at column %d", error->index);
                 error->type.p = ParseErrorBadFigureType;
                 error->isTrigger = 1;
-                return move2;
+                return move;
             }
         } else if (len == 4 && strcmp(FType, " 0-0") == 0) {
             move.extra = ExtraTypeShortCastling;
@@ -93,13 +93,13 @@ Move ParseMove(char* str, Errors* error)
             sprintf(error->desc, "Error at column %d", error->index);
             error->type.p = ParseErrorBadExtra;
             error->isTrigger = 1;
-            return move2;
+            return move;
         }
     } else {
         sprintf(error->desc, "Error at column %d", error->index);
         error->type.p = ParseErrorBadFigureType;
         error->isTrigger = 1;
-        return move2;
+        return move;
     }
     if (lene > 0) {
         if (lene == 1) {
@@ -127,7 +127,7 @@ Move ParseMove(char* str, Errors* error)
                 sprintf(error->desc, "Error at column %d", error->index);
                 error->type.p = ParseErrorBadExtra;
                 error->isTrigger = 1;
-                return move2;
+                return move;
             }
         } else if (lene == 4 && strcmp(Extra, "e.p.")) {
             move.extra = ExtraTypeEnPassant;
@@ -136,7 +136,7 @@ Move ParseMove(char* str, Errors* error)
             sprintf(error->desc, "Error at column %d", error->index);
             error->type.p = ParseErrorBadExtra;
             error->isTrigger = 1;
-            return move2;
+            return move;
         }
     } else {
         move.extra = ExtraTypeNone;
@@ -152,7 +152,7 @@ Move ParseMove(char* str, Errors* error)
             sprintf(error->desc, "Error at column %d", error->index);
             error->type.p = ParseErrorBadMoveType;
             error->isTrigger = 1;
-            return move2;
+            return move;
         }
     }
     return move;

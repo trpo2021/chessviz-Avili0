@@ -71,10 +71,10 @@ typedef struct {
     int isTrigger;
     char* desc;
     int index;
-    union type {
+    union {
         ParseError p;
         MoveError m;
-    };
+    } type;
 } Errors;
 
 void createChessboard(Chessboard* chessboard, const char* fromString);

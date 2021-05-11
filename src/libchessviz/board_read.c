@@ -38,14 +38,14 @@ Move ParseMove(char* str, Errors* error)
     if (len == 7) {
         error->index += 7;
         sprintf(error->desc, "Error at column %d", error->index);
-        error->p = ParseErrorBadFigureType;
+        error->type.p = ParseErrorBadFigureType;
         error->isTrigger = 1;
         return move2;
     }
     if (lene == 5) {
         error->index = 46;
         sprintf(error->desc, "Error at column %d", error->index);
-        error->p = ParseErrorBadExtra;
+        error->type.p = ParseErrorBadExtra;
         error->isTrigger = 1;
         return move2;
     }
@@ -70,7 +70,7 @@ Move ParseMove(char* str, Errors* error)
             default:
                 error->index += len;
                 sprintf(error->desc, "Error at column %d", error->index);
-                error->p = ParseErrorBadFigureType;
+                error->type.p = ParseErrorBadFigureType;
                 error->isTrigger = 1;
                 return move2;
             }
@@ -80,7 +80,7 @@ Move ParseMove(char* str, Errors* error)
             } else {
                 error->index += len;
                 sprintf(error->desc, "Error at column %d", error->index);
-                error->p = ParseErrorBadFigureType;
+                error->type.p = ParseErrorBadFigureType;
                 error->isTrigger = 1;
                 return move2;
             }
@@ -91,13 +91,13 @@ Move ParseMove(char* str, Errors* error)
         } else {
             error->index = 106;
             sprintf(error->desc, "Error at column %d", error->index);
-            error->p = ParseErrorBadExtra;
+            error->type.p = ParseErrorBadExtra;
             error->isTrigger = 1;
             return move2;
         }
     } else {
         sprintf(error->desc, "Error at column %d", error->index);
-        error->p = ParseErrorBadFigureType;
+        error->type.p = ParseErrorBadFigureType;
         error->isTrigger = 1;
         return move2;
     }
@@ -125,7 +125,7 @@ Move ParseMove(char* str, Errors* error)
             default:
                 error->index = 140;
                 sprintf(error->desc, "Error at column %d", error->index);
-                error->p = ParseErrorBadExtra;
+                error->type.p = ParseErrorBadExtra;
                 error->isTrigger = 1;
                 return move2;
             }
@@ -134,7 +134,7 @@ Move ParseMove(char* str, Errors* error)
         } else {
             error->index = 149;
             sprintf(error->desc, "Error at column %d", error->index);
-            error->p = ParseErrorBadExtra;
+            error->type.p = ParseErrorBadExtra;
             error->isTrigger = 1;
             return move2;
         }
@@ -150,7 +150,7 @@ Move ParseMove(char* str, Errors* error)
         default:
             error->index += 151;
             sprintf(error->desc, "Error at column %d", error->index);
-            error->p = ParseErrorBadMoveType;
+            error->type.p = ParseErrorBadMoveType;
             error->isTrigger = 1;
             return move2;
         }
@@ -168,14 +168,14 @@ int ParseStep(char* str, Errors* error, Moves* moves)
     if (num != isRigthNum) {
         error->index = 1;
         sprintf(error->desc, "Error at column %d", error->index);
-        error->p = ParseErrorBadNum;
+        error->type.p = ParseErrorBadNum;
         error->isTrigger = 1;
         return 1;
     }
     if (isPoint != '.') {
         error->index = index;
         sprintf(error->desc, "Error at column %d", error->index);
-        error->p = ParseErrorBadPoint;
+        error->type.p = ParseErrorBadPoint;
         error->isTrigger = 1;
         return 1;
     }

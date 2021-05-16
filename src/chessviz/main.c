@@ -27,13 +27,22 @@ int main(int argc, char** argv)
     Moves moves = {.num = 0};
     Errors error = {.index = 0, .isTrigger = 0};
     file = fopen(filename, "r");
+    int isRight;
     while (fgets(str, 32, file) != NULL) {
         printf("%s", str);
-        ParseStep(str, &error, &moves);
+        isRight = ParseStep(str, &error, &moves);
+        if (isRight == 1 || error.isTrigger == 1) {
+            printf("Error");
+            return 0;
+        }
     }
 
     for (int i = 0; i < moves.num; i++) {
-        DoMove(&chessboard, moves.move[i], &error);
+        isRight = DoMove(&chessboard, moves.move[i], &error);
+        if (isRight == 1 || error.isTrigger == 1) {
+            printf("Error2");
+            return 0;
+        }
     }
     chessboardToString(&chessboard, string);
     printf("\n%s", string);

@@ -1,4 +1,4 @@
-#include <ctest.h>
+#include <thirdparty/ctest.h>
 #include <libchessviz/Moves.h>
 #include <libchessviz/board_read.h>
 

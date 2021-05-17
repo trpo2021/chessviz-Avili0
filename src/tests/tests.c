@@ -1,6 +1,6 @@
-#include <thirdparty/ctest.h>
 #include <libchessviz/Moves.h>
 #include <libchessviz/board_read.h>
+#include <thirdparty/ctest.h>
 
 #define MOVE_ASSERT_EQUAL(exp, real)                 \
     ASSERT_EQUAL(exp.extra, real.extra);             \

@@ -2,6 +2,7 @@
 #include <libchessviz/board_read.h>
 #include <libchessviz/chessboard.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 int main(int argc, char** argv)
@@ -25,7 +26,10 @@ int main(int argc, char** argv)
             "PPPPPPPP"
             "RNBQKBNR");
     Moves moves = {.num = 0};
-    Errors error = {.index = 0, .isTrigger = 0};
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     file = fopen(filename, "r");
     int isRight;
     while (fgets(str, 32, file) != NULL) {

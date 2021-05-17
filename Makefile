@@ -4,13 +4,13 @@ TEST_APP_NAME = test
 
 CFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -I src -MP -MMD
-CPPFLAGS_TEST = -I src -I thirdparty -MP -MMD
+CPPFLAGS_TEST =-I src -I thirdparty -MP -MMD
 CC=gcc
 RM = rm -rf
 LDFLAGS =
 LDLIBS =
 
-TEST_DIR = tests
+TEST_DIR = src/tests
 BIN_DIR = bin
 OBJ_DIR = obj
 SRC_DIR = src
@@ -56,7 +56,7 @@ test: $(TEST_APP_PATH)
 $(TEST_APP_PATH): $(TEST_APP_OBJECTS) $(LIB_PATH)
 	$(CC) $(CFLAGS) $(CPPFLAGS_TEST) $^ -o $@ $(LDFLAGS) $(LDLIBS)
 
-$(OBJ_DIR)/%.o: /%.c
+$(OBJ_DIR)/$(TEST_DIR)/%.o: $(TEST_DIR)/%.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS_TEST) $< -o $@
 
 .PHONY: clean

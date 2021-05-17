@@ -1,5 +1,6 @@
 #include <libchessviz/Moves.h>
 #include <libchessviz/board_read.h>
+#include <stdlib.h>
 #include <thirdparty/ctest.h>
 
 #define MOVE_ASSERT_EQUAL(exp, real)                 \
@@ -15,7 +16,10 @@
 CTEST(InvalidParse, BadSpace1)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1 . e2-e4 e7-e5", &error, &moves);
     ASSERT_EQUAL(1, result);
     ASSERT_EQUAL(1, error.isTrigger);
@@ -24,7 +28,10 @@ CTEST(InvalidParse, BadSpace1)
 CTEST(InvalidParse, BadNum)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("2. e2-e4 e7-e5", &error, &moves);
     ASSERT_EQUAL(1, result);
     ASSERT_EQUAL(1, error.isTrigger);
@@ -33,7 +40,10 @@ CTEST(InvalidParse, BadNum)
 CTEST(InvalidParse, BadSpace2)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1.e2-e4 e7-e5", &error, &moves);
     ASSERT_EQUAL(1, result);
     ASSERT_EQUAL(1, error.isTrigger);
@@ -42,7 +52,10 @@ CTEST(InvalidParse, BadSpace2)
 CTEST(InvalidParse, BadSpace3)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1. e2-e4  e7-e5", &error, &moves);
     ASSERT_EQUAL(1, result);
     ASSERT_EQUAL(1, error.isTrigger);
@@ -51,7 +64,10 @@ CTEST(InvalidParse, BadSpace3)
 CTEST(InvalidParse, BadExtra1)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1. e2-e4 e7-e5  asdasd", &error, &moves);
     ASSERT_EQUAL(1, result);
     ASSERT_EQUAL(1, error.isTrigger);
@@ -60,7 +76,10 @@ CTEST(InvalidParse, BadExtra1)
 CTEST(InvalidParse, BadLongCastling)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1. 0-0-O e7-e5", &error, &moves);
     ASSERT_EQUAL(1, result);
     ASSERT_EQUAL(1, error.isTrigger);
@@ -69,7 +88,10 @@ CTEST(InvalidParse, BadLongCastling)
 CTEST(InvalidParse, BadShortCastling)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1. 0-O e7-e5", &error, &moves);
     ASSERT_EQUAL(1, result);
     ASSERT_EQUAL(1, error.isTrigger);
@@ -78,7 +100,10 @@ CTEST(InvalidParse, BadShortCastling)
 CTEST(InvalidParse, BadExtra2)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1. e2-e4P e7-e5", &error, &moves);
     ASSERT_EQUAL(1, result);
     ASSERT_EQUAL(1, error.isTrigger);
@@ -87,7 +112,10 @@ CTEST(InvalidParse, BadExtra2)
 CTEST(InvalidParse, BadField)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1. e0-e4 e7-e5", &error, &moves);
     ASSERT_EQUAL(1, result);
     ASSERT_EQUAL(1, error.isTrigger);
@@ -96,7 +124,10 @@ CTEST(InvalidParse, BadField)
 CTEST(InvalidParse, BadMoveType)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1. e0Xe4 e7-e5", &error, &moves);
     ASSERT_EQUAL(1, result);
     ASSERT_EQUAL(1, error.isTrigger);
@@ -105,7 +136,10 @@ CTEST(InvalidParse, BadMoveType)
 CTEST(InvalidParse, BadFigureType1)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1. Ce2-e4 e7-e5", &error, &moves);
     ASSERT_EQUAL(1, result);
     ASSERT_EQUAL(1, error.isTrigger);
@@ -114,7 +148,10 @@ CTEST(InvalidParse, BadFigureType1)
 CTEST(InvalidParse, BadFigureType2)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1.  e2-e4 e7-e5", &error, &moves);
     ASSERT_EQUAL(1, result);
     ASSERT_EQUAL(1, error.isTrigger);
@@ -123,7 +160,10 @@ CTEST(InvalidParse, BadFigureType2)
 CTEST(ValidParse, MoveType1)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     Move expMove1
             = {.extra = ExtraTypeNone,
                .who.type = FigureTypePawn,
@@ -141,7 +181,10 @@ CTEST(ValidParse, MoveType1)
 CTEST(ValidParse, MoveType2)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     Move expMove1
             = {.extra = ExtraTypeNone,
                .who.type = FigureTypePawn,
@@ -159,7 +202,10 @@ CTEST(ValidParse, MoveType2)
 CTEST(ValidParse, BishopMove)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     Move expMove
             = {.extra = ExtraTypeNone,
                .who.type = FigureTypeBishop,
@@ -177,7 +223,10 @@ CTEST(ValidParse, BishopMove)
 CTEST(ValidParse, KnightMove)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     Move expMove
             = {.extra = ExtraTypeNone,
                .who.type = FigureTypeKnight,
@@ -195,7 +244,10 @@ CTEST(ValidParse, KnightMove)
 CTEST(ValidParse, RookMove)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     Move expMove
             = {.extra = ExtraTypeNone,
                .who.type = FigureTypeRook,
@@ -213,7 +265,10 @@ CTEST(ValidParse, RookMove)
 CTEST(ValidParse, QueenMove)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     Move expMove
             = {.extra = ExtraTypeNone,
                .who.type = FigureTypeQueen,
@@ -231,7 +286,10 @@ CTEST(ValidParse, QueenMove)
 CTEST(ValidParse, KingMove)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     Move expMove
             = {.extra = ExtraTypeNone,
                .who.type = FigureTypeKing,
@@ -249,7 +307,10 @@ CTEST(ValidParse, KingMove)
 CTEST(ValidParse, ShortCastling)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1. 0-0 e7-e5", &error, &moves);
     ASSERT_EQUAL(0, result);
     ASSERT_EQUAL(2, moves.num);
@@ -260,7 +321,10 @@ CTEST(ValidParse, ShortCastling)
 CTEST(ValidParse, LongCastling)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1. 0-0-0 e7-e5", &error, &moves);
     ASSERT_EQUAL(0, result);
     ASSERT_EQUAL(2, moves.num);
@@ -271,7 +335,10 @@ CTEST(ValidParse, LongCastling)
 CTEST(ValidParse, MovesQualitity)
 {
     Moves moves = {.num = 0};
-    Errors error;
+    Errors error
+            = {.index = 0,
+               .isTrigger = 0,
+               .desc = (char*)malloc(sizeof(char) * 50)};
     int result = ParseStep("1. e2-e4", &error, &moves);
     ASSERT_EQUAL(0, result);
     ASSERT_EQUAL(1, moves.num);
@@ -335,8 +402,8 @@ CTEST(ValidMove, ShortCastling)
     Errors error = {.index = 0, .isTrigger = 0};
     ParseStep("1. 0-0 e7-e5", &error, &moves);
     int result = DoMove(&chessboard, moves.move[0], &error);
-    ASSERT_EQUAL(1, result);
-    ASSERT_EQUAL(1, error.isTrigger);
+    ASSERT_EQUAL(0, result);
+    ASSERT_EQUAL(0, error.isTrigger);
     ASSERT_EQUAL(FigureTypeNone, chessboard.cells[0][4].type);
     ASSERT_EQUAL(FigureTypeNone, chessboard.cells[0][7].type);
     ASSERT_EQUAL(FigureTypeKing, chessboard.cells[0][6].type);
@@ -586,7 +653,7 @@ CTEST(ValidMove, RookpMove4)
             "pppppppp"
             "        "
             "        "
-            "  R     "
+            " R      "
             "        "
             "PPPPPPPP"
             "R   KBNR");
